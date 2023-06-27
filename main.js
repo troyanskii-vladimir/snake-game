@@ -127,7 +127,7 @@ function refreshFoodCoord() {
   return;
 }
 
-let game = setInterval(draw , 200);
+let game = setInterval(draw , 100);
 
 window.addEventListener('keydown', (evt) => {
   if (evt.key === ' ') {
