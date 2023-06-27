@@ -1,0 +1,8 @@
+body {
+    background-color: #999;
+    display: flex;
+}
+
+#game-field {
+    margin: auto;
+}
