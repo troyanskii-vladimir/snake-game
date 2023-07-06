@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">    
-    <title>Document</title>
+    <title>Snake Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
+
+
+    <div class="btn__container">
+        <div class="score">
+            <p class="score__current">Your Score: <span class="score_points">0</span></p>
+            <p class="score__best">Your Best Score: <span class="score_points_best">0</span></p>
+        </div>
+        <button class="btn start-game-btn">Start Game</button>
+        <button class="btn records-btn">Records</button>
+    </div>
+
+    <canvas id="game-background" width="608" height="608"></canvas>
     <canvas id="game-field" width="608" height="608"></canvas>
+
+
+
     <script src="main.js"></script>
 </body>
 </html>

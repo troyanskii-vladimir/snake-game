@@ -1,9 +1,6 @@
 const canvas = document.getElementById('game-field');
 const ctx = canvas.getContext('2d');
 
-const bgImage = new Image();
-bgImage.src = 'img/bg.png';
-
 const foodImage = new Image();
 foodImage.src = 'img/carrot.png';
 
@@ -19,7 +16,7 @@ const DIRECTIONS = {
 
 let foodCoord = {
   x: (Math.floor(Math.random() * 17) + 1) * BOX,
-  y: (Math.floor(Math.random() * 15) + 3) * BOX,
+  y: (Math.floor(Math.random() * 12) + 6) * BOX,
 }
 
 let snakeCoord = [
@@ -51,12 +48,14 @@ window.addEventListener('keydown', (evt) => {
 
 
 function draw() {
-  ctx.drawImage(bgImage, 0, 0);
+  ctx.clearRect(0, 0, 608, 608)
   ctx.drawImage(foodImage, foodCoord.x, foodCoord.y);
 
 
   for (let i = 0; i < snakeCoord.length; i++) {
     ctx.fillStyle = 'green';
+    ctx.shadowColor = "#80FF00";
+    ctx.shadowBlur = 5;
     ctx.fillRect(snakeCoord[i].x, snakeCoord[i].y, BOX, BOX);
   }
 
@@ -121,16 +120,91 @@ function draw() {
 }
 
 
+let game = null
+
+function startGame() {
+  game = setInterval(draw , 100);
+}
+
+function endGame() {
+  clearInterval(game);
+  game = null;
+}
+
+
 function refreshFoodCoord() {
   foodCoord.x = (Math.floor(Math.random() * 17) + 1) * BOX;
-  foodCoord.y = (Math.floor(Math.random() * 15) + 3) * BOX;
+  foodCoord.y = (Math.floor(Math.random() * 12) + 6) * BOX;
   return;
 }
 
-let game = setInterval(draw , 100);
 
 window.addEventListener('keydown', (evt) => {
   if (evt.key === ' ') {
-    clearInterval(game);
+    endGame();
   }
+})
+
+
+
+const canvasBg = document.getElementById('game-background');
+const ctxBg = canvasBg.getContext('2d');
+
+function drawBg () {
+
+
+  for (let i = 0; i < 19; i++) {
+    ctxBg.fillStyle = '#431f10';
+    ctxBg.fillRect(BOX * i, 0, BOX, BOX);
+    ctxBg.fillRect(BOX * i, BOX * 5, BOX, BOX);
+    ctxBg.fillRect(0, BOX * i, BOX, BOX);
+    ctxBg.fillRect(BOX * i, BOX * 18, BOX, BOX);
+    ctxBg.fillRect(BOX * 18, BOX * i, BOX, BOX);
+  }
+
+  for (let i = 1; i < 18; i++) {
+    for (let j = 1; j < 18; j++) {
+
+
+      if (j < 5) {
+        ctxBg.fillStyle = '#f1d177';
+        ctxBg.fillRect(BOX * i, BOX * j, BOX, BOX);
+      }
+
+      if (j < 6) {
+        continue;
+      }
+
+      if (i % 2 === 0) {
+        if (j % 2 === 0) {
+          ctxBg.fillStyle = '#f1d177';
+        } else {
+          ctxBg.fillStyle = '#d09458';
+        }
+        ctxBg.fillRect(BOX * i, BOX * j, BOX, BOX);
+      } else {
+        if (j % 2 === 0) {
+          ctxBg.fillStyle = '#d09458';
+        } else {
+          ctxBg.fillStyle = '#f1d177';
+        }
+        ctxBg.fillRect(BOX * i, BOX * j, BOX, BOX);
+      }
+    }
+  }
+
+  ctxBg.fillStyle = '#431f10';
+  ctxBg.font = "48px solid";
+  ctxBg.fillText("0", BOX * 2, BOX * 2);
+
+
+}
+
+drawBg();
+
+
+const startGameBtn = document.querySelector('.start-game-btn');
+
+startGameBtn.addEventListener('click', (evt) => {
+  startGame();
 })
