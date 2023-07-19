@@ -147,6 +147,7 @@ window.addEventListener('keydown', (evt) => {
 
 
 
+
 const canvasBg = document.getElementById('game-background');
 const ctxBg = canvasBg.getContext('2d');
 
