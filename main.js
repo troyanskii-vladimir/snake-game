@@ -14,6 +14,7 @@ const DIRECTIONS = {
 }
 
 
+
 let foodCoord = {
   x: (Math.floor(Math.random() * 17) + 1) * BOX,
   y: (Math.floor(Math.random() * 12) + 6) * BOX,
